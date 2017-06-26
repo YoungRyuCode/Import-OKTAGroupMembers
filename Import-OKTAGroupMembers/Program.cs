@@ -51,24 +51,18 @@ namespace Import_OKTAGroupMembers
             for (int i = 0; i < upn.Length; i++)
             {                
                 try
-                {                    
-                    appUser = userClient.GetByUsername(upn[i]);
+                {                                        
+                    bool currentAppUser = false;
 
-                    //var tt = oktaClient.GetAppUsersClient()
-
-                    //if (appUser. == "ACTIVE")
-                    //{
-
-                    //groupUsersClient.GetList()
-                    //foreach (GroupUsersClient g in groupUsersClient)
-                    //{
-                    //    if(g.User)
-                    //}
-
-                    groupUsersClient.Add(appUser);
-                    importedUserCount++;
-                    Console.WriteLine("Active User: " + upn[i]);
-                    //}
+                    currentAppUser = Utilities.IsCurrnetAppMember(oktaClient, appGroupName, upn[i]);
+                    
+                    if (currentAppUser == false)
+                    {
+                        appUser = userClient.GetByUsername(upn[i]);
+                        groupUsersClient.Add(appUser);
+                        importedUserCount++;
+                        Console.WriteLine("Imported User: " + upn[i]);
+                    }
                 }
                 catch (Exception e)
                 {                    
