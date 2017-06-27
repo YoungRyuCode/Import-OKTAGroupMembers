@@ -30,5 +30,24 @@ namespace Import_OKTAGroupMembers
             }
             return existed;
         }
+        public static bool IsCurrnetAppMemberLINQ(OktaClient oktaClient, Group appGroupName, string appUser)
+        {
+            bool existed = false;
+            var existingUsers = oktaClient.GetGroupUsersClient(appGroupName);
+
+            //foreach (User user in existingUsers)
+            //{
+            //    if (appUser.ToLower().Replace("\r", "") == user.Profile.Email.ToLower())
+            //    {
+            //        existed = true;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        continue;
+            //    }
+            //}
+            return existed;
+        }
     }
 }
