@@ -51,11 +51,10 @@ namespace Import_OKTAGroupMembers
             for (int i = 0; i < upn.Length; i++)
             {                
                 try
-                {                                        
-                    bool currentAppUser = false;
+                {
+                    bool currentAppUser = false;                    
+                    currentAppUser = Utilities.IsCurrnetAppMemberLINQ(oktaClient, appGroupName, upn[i]);
 
-                    currentAppUser = Utilities.IsCurrnetAppMember(oktaClient, appGroupName, upn[i]);
-                    
                     if (currentAppUser == false)
                     {
                         appUser = userClient.GetByUsername(upn[i]);
